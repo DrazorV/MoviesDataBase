@@ -19,14 +19,14 @@ public class MdbApplication {
     }
 
     @Bean
-    public CommandLineRunner demo(userRepo repository) {
+    public CommandLineRunner demo(UserRepo repository) {
         return (args) -> {
             // save a few customers
             try{
-                repository.save(new user("p3150134@aueb.gr", "12345"));
-                repository.save(new user("vagelisp.97@gmail.com", "12345"));
-                repository.save(new user("vagelisp.97@outlook.com", "12345"));
-                repository.save(new user("vagelisp.97@icloud.com", "12345"));
+                repository.save(new User("p3150134@aueb.gr", "12345"));
+                repository.save(new User("vagelisp.97@gmail.com", "12345"));
+                repository.save(new User("vagelisp.97@outlook.com", "12345"));
+                repository.save(new User("vagelisp.97@icloud.com", "12345"));
             }catch (Exception e) {
                 System.out.println(e);
             }
@@ -34,7 +34,7 @@ public class MdbApplication {
             // fetch all customers
             log.info("Customers found with findAll():");
             log.info("-------------------------------");
-            for (user customer : repository.findAll()) {
+            for (User customer : repository.findAll()) {
                 log.info(customer.toString());
             }
             log.info("");

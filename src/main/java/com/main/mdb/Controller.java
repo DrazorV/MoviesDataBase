@@ -7,28 +7,28 @@ import org.springframework.web.bind.annotation.*;
 @org.springframework.stereotype.Controller
 public class Controller {
 
-	private final userRepo userRepo;
+	private final UserRepo userRepo;
 
-	public Controller(userRepo userRepo) {
+	public Controller(UserRepo userRepo) {
 		this.userRepo = userRepo;
 	}
 
 	@GetMapping("/create")
 	public String greetingForm(Model model) {
-		model.addAttribute("user", new user());
+		model.addAttribute("user", new User());
 		return "create";
 
 	}
 
 	@PostMapping("/create")
-	public String greetingSubmit(@ModelAttribute user user) {
-		userRepo.save(new user(user.getEmail(),user.getPassword()));
+	public String greetingSubmit(@ModelAttribute User user) {
+		userRepo.save(new User(user.getEmail(),user.getPassword()));
 		return "redirect:/";
 	}
 
 	@RequestMapping("/")
 	public String index (Model model) {
-		model.addAttribute("user", new user());
+		model.addAttribute("user", new User());
 		return "index";
 	}
 }

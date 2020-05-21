@@ -3,7 +3,7 @@ package com.main.mdb;
 import javax.persistence.*;
 
 @Entity
-public class user {
+public class User {
 
     @Id
     @GeneratedValue(strategy=GenerationType.TABLE)
@@ -13,9 +13,9 @@ public class user {
     private String email;
     private String password;
 
-    protected user() {}
+    protected User() {}
 
-    public user(String email, String password) {
+    public User(String email, String password) {
         this.email = email;
         this.password = password;
     }

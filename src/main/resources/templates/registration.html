@@ -22,15 +22,19 @@
 <!--===============================================================================================-->
 </head>
 <body>
-<a th:href="@{create}"></a>
+<a th:href="@{registration}"></a>
 	<div class="limiter">
 		<div class="container-login100">
+			<p class="error-message" th:if="${#fields.hasGlobalErrors()}"
+			   th:each="error : ${#fields.errors('global')}" th:text="${error}">Validation
+				error</p>
+
 			<div class="wrap-login100">
 				<div class="login100-pic js-tilt" data-tilt>
 					<img th:src="@{/images/img-01.png}" alt="IMG" src="/images/img-01.png">
 				</div>
 
-				<form class="login100-form validate-form" action="#" th:action="@{/create}" th:object="${user}" method="post">
+				<form class="login100-form validate-form" action="#" th:action="@{/registration}" th:object="${user}" method="post">
 					<span class="login100-form-title">
 						Member Registration
 					</span>
@@ -39,10 +43,15 @@
 						<label>
 							<input class="input100" type="text" name="email" placeholder="Email" th:field="*{email}">
 						</label>
+
 						<span class="focus-input100"></span>
 						<span class="symbol-input100">
 							<i class="fa fa-envelope" aria-hidden="true"></i>
 						</span>
+					</div>
+
+					<div class="wrap-input100" >
+						<p class="error-message" th:each="error : ${#fields.errors('email')}" th:text="${error}">Validation error</p>
 					</div>
 
 					<div class="wrap-input100 validate-input" data-validate = "Password is required">
@@ -54,7 +63,11 @@
 							<i class="fa fa-lock" aria-hidden="true"></i>
 						</span>
 					</div>
-					
+
+					<div class="wrap-input100" >
+						<p class="error-message" th:each="error : ${#fields.errors('password')}" th:text="${error}">Validation error</p>
+					</div>
+
 					<div class="container-login100-form-btn">
 						<button class="login100-form-btn" type="submit" value="Submit">
 							Register

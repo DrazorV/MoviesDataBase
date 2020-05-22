@@ -19,7 +19,7 @@ public class MdbApplication {
     }
 
     @Bean
-    public CommandLineRunner demo(UserRepo repository) {
+    public CommandLineRunner demo(UserRepository repository) {
         return (args) -> {
             // save a few customers
             try{
@@ -43,7 +43,7 @@ public class MdbApplication {
             // fetch customers by last name
             log.info("Customer found with findByLastName('Bauer'):");
             log.info("--------------------------------------------");
-            repository.findByEmail("Bauer").forEach(bauer -> log.info(bauer.toString()));
+            log.info(repository.findByEmail("vagelisp.97@gmail.com").toString());
             // for (Customer bauer : repository.findByLastName("Bauer")) {
             //  log.info(bauer.toString());
             // }

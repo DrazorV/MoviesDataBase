@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>The Ultimate Movie Search</title>
+
+    <!-- Bootstrap core CSS -->
+    <link th:href="@{css/bootstrap.min.css}" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link th:href="@{css/search.css}" rel="stylesheet">
+
+</head>
+
+<body>
+    <a th:href="@{home}"></a>
+    <div class="container">
+
+        <!-- input tag -->
+
+        <input id="searchbar1" onkeyup="search5()" type="text" name="search" placeholder="Search Movies..">
+
+
+        <!-- ordered list -->
+        <ol id='list'>
+            <li class="movies">Cat</li>
+            <li class="movies">Dog</li>
+            <li class="movies">Elephant</li>
+            <li class="movies">Fish</li>
+            <li class="movies">Gorilla</li>
+            <li class="movies">Monkey</li>
+            <li class="movies">Turtle</li>
+            <li class="movies">Whale</li>
+            <li class="movies">Alligator</li>
+            <li class="movies">Donkey</li>
+            <li class="movies">Horse</li>
+        </ol>
+    </div>
+    <script th:src="@{/js/search.js}"></script>
+</body>
+</html>

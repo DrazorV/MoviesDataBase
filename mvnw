@@ -41,6 +41,7 @@ if [ -z "$MAVEN_SKIP_RC" ]; then
   fi
 
   if [ -f "$HOME/.mavenrc" ]; then
+    # shellcheck disable=SC1090
     . "$HOME/.mavenrc"
   fi
 
@@ -59,6 +60,7 @@ Darwin*)
   # See https://developer.apple.com/library/mac/qa/qa1170/_index.html
   if [ -z "$JAVA_HOME" ]; then
     if [ -x "/usr/libexec/java_home" ]; then
+      # shellcheck disable=SC2155
       export JAVA_HOME="$(/usr/libexec/java_home)"
     else
       export JAVA_HOME="/Library/Java/Home"
@@ -95,7 +97,7 @@ if [ -z "$M2_HOME" ]; then
   # make it fully qualified
   M2_HOME=$(cd "$M2_HOME" && pwd)
 
-  cd "$saveddir"
+  cd "$saveddir" || exit
   # echo Using m2 at $M2_HOME
 fi
 
@@ -113,12 +115,12 @@ fi
 if $mingw; then
   [ -n "$M2_HOME" ] &&
     M2_HOME="$( (
-      cd "$M2_HOME"
+      cd "$M2_HOME" || exit
       pwd
     ))"
   [ -n "$JAVA_HOME" ] &&
     JAVA_HOME="$( (
-      cd "$JAVA_HOME"
+      cd "$JAVA_HOME" || exit
       pwd
     ))"
 fi
@@ -128,6 +130,7 @@ if [ -z "$JAVA_HOME" ]; then
   if [ -n "$javaExecutable" ] && ! [ "$(expr \"$javaExecutable\" : '\([^ ]*\)')" = "no" ]; then
     # readlink(1) is not available as standard on Solaris 10.
     readLink=$(which readlink)
+    # shellcheck disable=SC2046
     if [ ! $(expr "$readLink" : '\([^ ]*\)') = "no" ]; then
       if $darwin; then
         javaHome="$(dirname \"$javaExecutable\")"

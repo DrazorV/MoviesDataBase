@@ -26,19 +26,22 @@
 <a th:href="@{index}"></a>
 	<div class="limiter">
 		<div class="container-login100">
+			<p class="error-message" th:if="${#fields.hasGlobalErrors()}"
+			   th:each="error : ${#fields.errors('global')}" th:text="${error}">Validation
+				error</p>
 			<div class="wrap-login100">
 				<div class="login100-pic js-tilt" data-tilt>
 					<img th:src="@{/images/img-01.png}" alt="IMG">
 				</div>
 
-				<form class="login100-form validate-form">
+				<form class="login100-form validate-form" th:action="@{/}" th:object="${user}" method="post">
 					<span class="login100-form-title">
 						Member Login
 					</span>
 
 					<div class="wrap-input100 validate-input" data-validate = "Valid email is required: ex@abc.xyz">
 						<label>
-							<input class="input100" type="text" name="email" placeholder="Email">
+							<input class="input100" type="text" name="email" placeholder="Email" th:field="*{email}">
 						</label>
 						<span class="focus-input100"></span>
 						<span class="symbol-input100">
@@ -46,14 +49,22 @@
 						</span>
 					</div>
 
+					<div class="wrap-input100" >
+						<p class="error-message" th:each="error : ${#fields.errors('email')}" th:text="${error}">Validation error</p>
+					</div>
+
 					<div class="wrap-input100 validate-input" data-validate = "Password is required">
 						<label>
-							<input class="input100" type="password" name="pass" placeholder="Password">
+							<input class="input100" type="password" name="pass" placeholder="Password" th:field="*{password}">
 						</label>
 						<span class="focus-input100"></span>
 						<span class="symbol-input100">
 							<i class="fa fa-lock" aria-hidden="true"></i>
 						</span>
+					</div>
+
+					<div class="wrap-input100" >
+						<p class="error-message" th:each="error : ${#fields.errors('password')}" th:text="${error}">Validation error</p>
 					</div>
 					
 					<div class="container-login100-form-btn">
@@ -71,8 +82,10 @@
 						</a>
 					</div>
 
-					<div class="text-center p-t-136">
-						<a class="txt2" href="create">
+					<div th:if="${param.success}" class="alert alert-info -align-center">You've successfully registered to our awesome app!</div>
+
+					<div class="text-center p-t-136" th:unless="${param.success}">
+						<a class="txt2" href="registration">
 							Create your Account
 							<i class="fa fa-long-arrow-right m-l-5" aria-hidden="true"></i>
 						</a>

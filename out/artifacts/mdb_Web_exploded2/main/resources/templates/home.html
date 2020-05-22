@@ -25,10 +25,9 @@
     <!--===============================================================================================-->
     <link rel="stylesheet" type="text/css" th:href="@{/css/util.css}">
     <link rel="stylesheet" type="text/css" th:href="@{/css/main.css}">
-    <script th:src="@{//code.jquery.com/jquery-1.11.3.min.js}"></script>
-    <script th:src="@{//ajax.googleapis.com/ajax/libs/angularjs/1.5.0-beta.1/angular.min.js}"></script>
+    <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.0-beta.1/angular.min.js"></script>
     <!--===============================================================================================-->
-    <script th:src="@{/js/search.js}"></script>
 </head>
 
 <body ng-app="OMDbAPISearch">
@@ -46,7 +45,9 @@
         </form>
 
         <div class="results">
+
             <div class="result" movie-srch-results ng-repeat="movie in movieResults"></div>
+
         </div>
         <div class="noResults"></div>
 
@@ -58,6 +59,6 @@
             </div>
         </div>
     </div>
-
+    <script th:src="@{/js/search.js}"></script>
 </body>
 </html>

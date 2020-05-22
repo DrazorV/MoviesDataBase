@@ -37,6 +37,8 @@ function find_my_div(){
     }
 }
 
+
+
 (function(angular) {
     'use strict';
     angular.module('OMDbAPISearch', [])
@@ -55,7 +57,7 @@ function find_my_div(){
                                 // success
                                 $('.results').css('display', 'block');
                                 $('.noResults').css('display', 'none');
-                                let theSrchResults = response.data["Search"];
+                                var theSrchResults = response.data["Search"];
                                 angular.forEach(theSrchResults, function(obj) {
                                     // loop through each movie, and pull the details using the IMDB ID
                                     $http({

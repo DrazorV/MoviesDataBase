@@ -22,9 +22,9 @@ public abstract class UserServiceImpl implements UserRepository {
     }
 
     public User save(User registration){
-        User user = new User();
-        user.setEmail(registration.getEmail());
-        user.setPassword(passwordEncoder.encode(registration.getPassword()));
-        return userRepository.save(user);
+        User User = new User();
+        User.setEmail(registration.getEmail());
+        User.setPassword(passwordEncoder.encode(registration.getPassword()));
+        return userRepository.save(User);
     }
 }

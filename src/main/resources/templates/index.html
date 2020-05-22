@@ -81,7 +81,9 @@
 							Username / Password?
 						</a>
 					</div>
-
+					<br><br>
+					<div th:if="${param.error}" class="alert alert-info -align-center">Invalid username or password.</div>
+					<div th:if="${param.logout}" class="alert alert-info -align-center">You have been logged out.</div>
 					<div th:if="${param.success}" class="alert alert-info -align-center">You've successfully registered to our awesome app!</div>
 
 					<div class="text-center p-t-136" th:unless="${param.success}">

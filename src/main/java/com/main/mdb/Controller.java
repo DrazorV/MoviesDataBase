@@ -13,7 +13,7 @@ import javax.validation.Valid;
 public class Controller {
 
 	private final UserRepository userRepository;
-	User LoginUser;
+	User loginUser;
 
 	public Controller(UserRepository userRepository) {
 		this.userRepository = userRepository;
@@ -27,7 +27,7 @@ public class Controller {
 
 	@RequestMapping("home")
 	public String HOME() {
-		Long a = LoginUser.getId();
+		Long a = loginUser.getId();
 		return "home";
 	}
 
@@ -45,9 +45,9 @@ public class Controller {
 	}
 
 	@PostMapping("/registration")
-	public String registerUserAccount(@ModelAttribute("user") @Valid User user, BindingResult result){
+	public String registerUserAccount(@ModelAttribute("user") @Valid User User, BindingResult result){
 
-		User existing = userRepository.findByEmail(user.getEmail());
+		User existing = userRepository.findByEmail(User.getEmail());
 		if (existing != null){
 			result.rejectValue("email", null, "There is already an account registered with that email");
 		}
@@ -56,18 +56,18 @@ public class Controller {
 			return "registration";
 		}
 
-		userRepository.save(user);
+		userRepository.save(User);
 		return "redirect:/?success";
 	}
 
 	@PostMapping("/")
-	public String login(@ModelAttribute("user") @Valid User user, BindingResult result){
+	public String login(@ModelAttribute("user") @Valid User User, BindingResult result){
 
-		LoginUser = userRepository.findByEmail(user.getEmail());
-		if (LoginUser == null){
+		loginUser = userRepository.findByEmail(User.getEmail());
+		if (loginUser == null){
 			result.rejectValue("email", null, "There is no account registered with that email");
 		}else{
-			if (!LoginUser.getPassword().equals(user.getPassword())) {
+			if (!loginUser.getPassword().equals(User.getPassword())) {
 				result.rejectValue("password", null, "Wrong password, try again.");
 			}
 		}

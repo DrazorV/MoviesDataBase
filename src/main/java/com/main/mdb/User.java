@@ -1,17 +1,24 @@
 package com.main.mdb;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
-public class User {
+@Table(name = "user")
+public class User{
 
     @Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @SequenceGenerator(name = "user_seq")
+    @Column(unique=true, nullable=false, name = "id")
     private Long id;
 
     @Column(unique=true)
     private String email;
     private String password;
+
+    @OneToMany(mappedBy = "user",fetch = FetchType.LAZY)
+    private Set<UserSave> userSaves;
 
     public User() {}
 
@@ -47,4 +54,15 @@ public class User {
         return password;
     }
 
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Set<UserSave> getUserSaves() {
+        return userSaves;
+    }
+
+    public void setUserSaves(Set<UserSave> userSaves) {
+        this.userSaves = userSaves;
+    }
 }

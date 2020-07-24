@@ -1,21 +1,21 @@
 package com.main.mdb;
 
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
 @org.springframework.stereotype.Controller
 public class Controller {
 
+	private final SaveRepository saveRepository;
 	private final UserRepository userRepository;
 	User loginUser;
 
-	public Controller(UserRepository userRepository) {
+	public Controller(SaveRepository saveRepository, UserRepository userRepository) {
+		this.saveRepository = saveRepository;
 		this.userRepository = userRepository;
 	}
 
@@ -25,16 +25,41 @@ public class Controller {
 		return "index";
 	}
 
-	@RequestMapping("home")
-	public String HOME() {
-		Long a = loginUser.getId();
-		return "home";
+	@CrossOrigin(origins = "http://localhost:8080")
+	@RequestMapping(value = "/bookmark", method = RequestMethod.POST)
+	public @ResponseBody
+	boolean Bookmark(@RequestParam("id") String id) {
+		UserSave userSave = new UserSave(loginUser,id);
+		saveRepository.save(userSave);
+		return true;
 	}
 
+	@Transactional
+	@CrossOrigin(origins = "http://localhost:8080")
+	@RequestMapping(value = "/bookmarked", method = RequestMethod.POST)
+	public @ResponseBody
+	boolean UnBookmark(@RequestParam("id") String id) {
+		saveRepository.deleteByUserAndMovieId(loginUser,id);
+		return true;
+	}
 
-	@ModelAttribute("/user")
-	public User user() {
-		return new User();
+	@CrossOrigin(origins = "http://localhost:8080")
+	@RequestMapping(value = "/update", method = RequestMethod.POST)
+	public @ResponseBody
+	UserSave Updater(@RequestParam("id") String id) {
+		return saveRepository.findByUserAndMovieId(loginUser,id);
+	}
+
+	@CrossOrigin(origins = "http://localhost:8080")
+	@RequestMapping(value = "/getBookmarks", method = RequestMethod.POST)
+	public @ResponseBody
+	Iterable<UserSave> getBookmarks() {
+		return saveRepository.findAllByUser(loginUser);
+	}
+
+	@RequestMapping("home")
+	public String HOME() {
+		return "home";
 	}
 
 	@GetMapping("/registration")
@@ -76,5 +101,10 @@ public class Controller {
 		}else{
 			return "home";
 		}
+	}
+
+	@PostMapping("/logout")
+	public String logout(){
+		return "redirect:/";
 	}
 }

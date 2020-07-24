@@ -1,63 +1,57 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta content="IE=edge" http-equiv="X-UA-Compatible">
+    <meta content="width=device-width, initial-scale=1" name="viewport">
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <meta name="description" content="">
-    <meta name="author" content="">
+    <meta content="" name="description">
+    <meta content="" name="author">
 
     <title>The Ultimate Movie Search</title>
 
     <!--===============================================================================================-->
-    <link rel="icon" type="image/png" th:href="@{/images/icons/favicon.ico}"/>
+    <link rel="icon" th:href="@{/images/icons/favicon.ico}" type="image/png"/>
     <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" th:href="@{/vendor/bootstrap/css/bootstrap.min.css}">
+    <link rel="stylesheet" th:href="@{/vendor/bootstrap/css/bootstrap.min.css}" type="text/css">
     <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" th:href="@{/fonts/font-awesome-4.7.0/css/font-awesome.min.css}">
+    <link rel="stylesheet" th:href="@{/fonts/font-awesome-4.7.0/css/font-awesome.min.css}" type="text/css">
     <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" th:href="@{/vendor/animate/animate.css}">
+    <link rel="stylesheet" th:href="@{/vendor/animate/animate.css}" type="text/css">
     <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" th:href="@{/vendor/css-hamburgers/hamburgers.min.css}">
+    <link rel="stylesheet" th:href="@{/vendor/css-hamburgers/hamburgers.min.css}" type="text/css">
     <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" th:href="@{/vendor/select2/select2.min.css}">
+    <link rel="stylesheet" th:href="@{/vendor/select2/select2.min.css}" type="text/css">
     <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" th:href="@{/css/util.css}">
-    <link rel="stylesheet" type="text/css" th:href="@{/css/main.css}">
+    <link rel="stylesheet" th:href="@{/css/util.css}" type="text/css">
+    <link rel="stylesheet" th:href="@{/css/main.css}" type="text/css">
     <script th:src="@{//code.jquery.com/jquery-1.11.3.min.js}"></script>
-    <script th:src="@{//ajax.googleapis.com/ajax/libs/angularjs/1.5.0-beta.1/angular.min.js}"></script>
+    <script th:src="@{https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js}"></script>
     <!--===============================================================================================-->
     <script th:src="@{/js/search.js}"></script>
 </head>
+    <body>
+        <a th:href="@{home}"></a>
+        <div class="container-login100" style="align-content: start">
+            <div class="container" style="margin-bottom: 20px">
+                <div class="row">
+                    <div class="col-auto" style="margin-right: 1px;margin-left: 1px;padding: 0;">
+                        <button class="btn btn-success" th:id="bookmarks">Bookmarks</button>
+                    </div>
+                    <div class="col-9" style="margin-right: 1px;margin-left: 1px;padding: 0;">
+                        <input aria-label="Search" class="col-md-12 tv-search-tm form-control" id="edit_search" onkeyup="find_my_div();" placeholder="Type a Movie.." type="text">
+                    </div>
+                    <div class="col-auto" style="margin-right: 1px;margin-left: 1px;padding: 0;">
+                        <form name="logoutForm" th:action="@{/logout}" method="post">
+                            <button class="btn btn-danger" type="submit" value="Sign Out">Logout</button>
+                        </form>
+                    </div>
 
-<body ng-app="OMDbAPISearch">
-    <a th:href="@{home}"></a>
-    <div class="container" ng-controller="searchMovies">
-
-        <h1>Search a Movie Title Below</h1>
-        <p>This application utilizes OMDb API data for all results (<a href="http://www.omdbapi.com" target="_blank">http://www.omdbapi.com</a>)</p>
-        <form>
-            <div class="search">
-                <input id="theSearch" ng-model="searchparam" placeholder="movie name" type="text" ngTrim="true" />
-                <button ng-click="fetch()">Search</button>
-                <div class="clear"></div>
+                </div>
             </div>
-        </form>
-
-        <div class="results">
-            <div class="result" movie-srch-results ng-repeat="movie in movieResults"></div>
-        </div>
-        <div class="noResults"></div>
-
-    </div>
-    <div class="limiter">
-        <div class="container-login100">
-            <div class="md-form active-cyan-2 mb-3">
-                <input class="form-control" type="text" placeholder="Type a Movie.." aria-label="Search" id="edit_search"  onkeyup="find_my_div();">
+            <div th:id="con">
+                <div class="card-columns" style="column-count: 3" id="layout"></div>
             </div>
         </div>
-    </div>
-
-</body>
+    </body>
 </html>
